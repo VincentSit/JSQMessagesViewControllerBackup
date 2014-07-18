@@ -82,6 +82,10 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     _contentView = nil;
 }
 
+- (BOOL)recorderButtonHidden {
+    return self.contentView.button.alpha == 0.f;
+}
+
 - (void)toggleRecorderButtonHidden
 {
     BOOL isRecording = self.contentView.textView.alpha == 0.f;
