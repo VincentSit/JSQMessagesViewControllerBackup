@@ -71,8 +71,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
                                          JSQMessagesCollectionViewCellDelegate,
-                                         JSQMessagesKeyboardControllerDelegate,
-                                         UITextViewDelegate>
+                                         JSQMessagesKeyboardControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -1118,6 +1117,10 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    if (textView != self.inputToolbar.contentView.textView) {
+        return;
+    }
+    
     [textView becomeFirstResponder];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
@@ -1127,11 +1130,19 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    if (textView != self.inputToolbar.contentView.textView) {
+        return;
+    }
+    
     [textView resignFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    if (textView != self.inputToolbar.contentView.textView) {
+        return NO;
+    }
+    
     if ([text isEqualToString:@"\n"]) {
         [self didSendMessageWithText:[self jsq_currentlyComposedMessageText]
                               sender:self.sender
