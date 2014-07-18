@@ -236,13 +236,13 @@
  *  This method is called when the user taps the send button on the inputToolbar
  *  after composing a message with the specified data.
  *
- *  @param text   The message text.
- *  @param sender The message sender.
- *  @param date   The message date.
+ *  @param attributedText   The message text.
+ *  @param sender           The message sender.
+ *  @param date             The message date.
  */
-- (void)didSendMessageWithText:(NSString *)text
-                        sender:(NSString *)sender
-                          date:(NSDate *)date;
+- (void)didSendMessageWithAttributedText:(NSAttributedString *)attributedText
+                                  sender:(NSString *)sender
+                                    date:(NSDate *)date;
 
 - (void)didPressLeftBarButton:(UIButton *)sender;
 - (void)didPressRightBarButton:(UIButton *)sender;

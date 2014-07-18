@@ -20,7 +20,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "NSString+JSQMessages.h"
+#import "NSAttributedString+JSQMessages.h"
 
 
 @interface JSQMessagesComposerTextView ()
@@ -106,7 +106,7 @@
 
 - (BOOL)hasText
 {
-    return ([[self.text jsq_stringByTrimingWhitespace] length] > 0);
+    return ([[self.attributedText jsq_attributedStringByTrimingWhitespace] length] > 0);
 }
 
 #pragma mark - Setters
@@ -136,7 +136,13 @@
 - (void)setText:(NSString *)text
 {
     [super setText:text];
-    [self setNeedsDisplay];
+    
+    if (!text) {
+        [self setAttributedText:nil];
+    }
+    else {
+        [self setAttributedText:[[NSAttributedString alloc] initWithString:text]];
+    }
 }
 
 - (void)setAttributedText:(NSAttributedString *)attributedText

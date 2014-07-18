@@ -45,7 +45,7 @@
 /**
  *  The body text of the message. Default is empty.
  */
-@property (copy, nonatomic) NSString *text;
+@property (copy, nonatomic) NSAttributedString *attributedText;
 
 /**
  *  The audio data of the message. Only valid when `type` is `JSQMessageAudio`. Default is `nil`.
@@ -92,12 +92,12 @@
 /**
  *  Initializes and returns a message object having the given text, sender, and current system date.
  *
- *  @param text   The body text of the message.
- *  @param sender The name of the user who sent the message.
+ *  @param attributedText   The body text of the message.
+ *  @param sender           The name of the user who sent the message.
  *
  *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-+ (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender;
++ (instancetype)messageWithAttributedText:(NSAttributedString *)attributedText sender:(NSString *)sender;
 
 /**
  *  Initializes and returns a message object having the given image, sender, and current system date.
@@ -174,15 +174,15 @@
 /**
  *  Initializes and returns a message object having the given text, sender, and date.
  *
- *  @param text   The body text of the message.
- *  @param sender The name of the user who sent the message.
- *  @param date   The date that the message was sent.
+ *  @param attributedText   The body text of the message.
+ *  @param sender           The name of the user who sent the message.
+ *  @param date             The date that the message was sent.
  *
  *  @return An initialized `JSQMessage` object or `nil` if the object could not be successfully initialized.
  */
-- (instancetype)initWithText:(NSString *)text
-                      sender:(NSString *)sender
-                        date:(NSDate *)date;
+- (instancetype)initWithAttributedText:(NSAttributedString *)attributedText
+                                sender:(NSString *)sender
+                                  date:(NSDate *)date;
 
 /**
  *  Initializes and returns a message object having the given image, sender, and date.

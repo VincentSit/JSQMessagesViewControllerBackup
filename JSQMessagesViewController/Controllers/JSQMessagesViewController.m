@@ -46,6 +46,7 @@
 #import "JSQMessagesTimestampFormatter.h"
 
 #import "NSString+JSQMessages.h"
+#import "NSAttributedString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
 
@@ -87,7 +88,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_finishSendingOrReceivingMessage;
 
-- (NSString *)jsq_currentlyComposedMessageText;
+- (NSAttributedString *)jsq_currentlyComposedMessageText;
 
 - (void)jsq_updateKeyboardTriggerPoint;
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
@@ -302,9 +303,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Messages view controller
 
-- (void)didSendMessageWithText:(NSString *)text
-                        sender:(NSString *)sender
-                          date:(NSDate *)date {}
+- (void)didSendMessageWithAttributedText:(NSAttributedString *)attributedText
+                                  sender:(NSString *)sender
+                                    date:(NSDate *)date {}
 
 - (void)didPressLeftBarButton:(UIButton *)sender {}
 
@@ -857,10 +858,10 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
     switch (messageType) {
         case JSQMessageText:
         {
-            NSString *messageText = [messageData text];
+            NSAttributedString *messageText = [messageData attributedText];
             NSParameterAssert(messageText != nil);
             
-            cell.textView.text = messageText;
+            cell.textView.attributedText = messageText;
             cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
         }
             break;
@@ -1103,12 +1104,13 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
 }
 
 
-- (NSString *)jsq_currentlyComposedMessageText
+- (NSAttributedString *)jsq_currentlyComposedMessageText
 {
     //  add a space to accept any auto-correct suggestions
-    NSString *text = self.inputToolbar.contentView.textView.text;
-    self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@" "];
-    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
+    NSMutableAttributedString *attributedText = [self.inputToolbar.contentView.textView.attributedText mutableCopy];
+    [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    self.inputToolbar.contentView.textView.attributedText = attributedText;
+    return [self.inputToolbar.contentView.textView.attributedText jsq_attributedStringByTrimingWhitespace];
 }
 
 #pragma mark - Text view delegate
@@ -1142,9 +1144,7 @@ handleOutgoingAudioMessageWithMessageData:(id<JSQMessageData>)messageData
     }
     
     if ([text isEqualToString:@"\n"]) {
-        [self didSendMessageWithText:[self jsq_currentlyComposedMessageText]
-                              sender:self.sender
-                                date:[NSDate date]];
+        [self didSendMessageWithAttributedText:[self jsq_currentlyComposedMessageText] sender:self.sender date:[NSDate date]];
         return NO;
     }
     return YES;

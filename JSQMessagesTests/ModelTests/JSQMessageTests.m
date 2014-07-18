@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) NSString *sender;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) NSAttributedString *text;
 @property (strong, nonatomic) NSData *audio;
 @property (strong, nonatomic) UIImage *sourceImage;
 @property (strong, nonatomic) UIImage *thumbnailImage;
@@ -42,9 +42,9 @@
     [super setUp];
     self.sender = @"Jesse Squires";
     self.date = [NSDate date];
-    self.text = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
-                @"laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi"
-                @"architecto beatae vitae dicta sunt explicabo.";
+    self.text = [[NSAttributedString alloc] initWithString:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
+                 @"laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi"
+                 @"architecto beatae vitae dicta sunt explicabo."];
     self.audio = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"demo_for_Elise" ofType:@"mp3"]];
     self.sourceImage = [UIImage imageNamed:@"FICDDemoLargeImage000"];
     self.thumbnailImage = [UIImage imageNamed:@"FICDDemoSmallImage000"];
@@ -82,10 +82,10 @@
 
 - (void)testMessageInit
 {
-    JSQMessage *msg0 = [[JSQMessage alloc] initWithText:self.text sender:self.sender date:self.date];
+    JSQMessage *msg0 = [[JSQMessage alloc] initWithAttributedText:self.text sender:self.sender date:self.date];
     XCTAssertNotNil(msg0, @"Message should not be nil");
     
-    JSQMessage *msg1 = [JSQMessage messageWithText:self.text sender:self.sender];
+    JSQMessage *msg1 = [JSQMessage messageWithAttributedText:self.text sender:self.sender];
     XCTAssertNotNil(msg1, @"Message shold not be nil");
     
     JSQMessage *msg2 = [[JSQMessage alloc] initWithImageURL:self.remoteImageURL placeholderImage:self.placeholderImage sender:self.sender date:self.date];
@@ -139,17 +139,17 @@
 
 - (void)testTextMessageInvalidInit
 {
-    XCTAssertThrows([JSQMessage messageWithText:nil sender:nil], @"Invalid init should throw");
-    XCTAssertThrows([JSQMessage messageWithText:self.text sender:nil], @"Invalid init should throw");
-    XCTAssertThrows([JSQMessage messageWithText:nil sender:self.sender], @"Invalid init should throw");
+    XCTAssertThrows([JSQMessage messageWithAttributedText:nil sender:nil], @"Invalid init should throw");
+    XCTAssertThrows([JSQMessage messageWithAttributedText:self.text sender:nil], @"Invalid init should throw");
+    XCTAssertThrows([JSQMessage messageWithAttributedText:nil sender:self.sender], @"Invalid init should throw");
     
-    XCTAssertThrows([[JSQMessage alloc] initWithText:nil sender:nil date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:nil sender:nil date:self.date], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:nil sender:self.sender date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:nil sender:self.sender date:self.date], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:self.text sender:nil date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:self.text sender:self.sender date:nil], @"Invalid init should throw");
-    XCTAssertThrows([[JSQMessage alloc] initWithText:self.text sender:nil date:self.date], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:nil sender:nil date:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:nil sender:nil date:self.date], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:nil sender:self.sender date:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:nil sender:self.sender date:self.date], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:self.text sender:nil date:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:self.text sender:self.sender date:nil], @"Invalid init should throw");
+    XCTAssertThrows([[JSQMessage alloc] initWithAttributedText:self.text sender:nil date:self.date], @"Invalid init should throw");
 }
 
 - (void)testPhotoMessageInvalidInit
@@ -340,7 +340,7 @@
 
 - (void)testTextMessageIsEqual
 {
-    JSQMessage *msg = [JSQMessage messageWithText:self.text sender:self.sender];
+    JSQMessage *msg = [JSQMessage messageWithAttributedText:self.text sender:self.sender];
     JSQMessage *copy = [msg copy];
     
     XCTAssertEqualObjects(msg, copy, @"Copied messages should be equal");
@@ -458,7 +458,7 @@
 
 - (void)testTextMessageArchiving
 {
-    JSQMessage *msg = [JSQMessage messageWithText:self.text sender:self.sender];
+    JSQMessage *msg = [JSQMessage messageWithAttributedText:self.text sender:self.sender];
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:msg];
     
     JSQMessage *unarchivedMsg = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];

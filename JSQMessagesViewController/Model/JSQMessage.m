@@ -24,9 +24,9 @@
 
 #pragma mark - Initialization
 
-+ (instancetype)messageWithText:(NSString *)text sender:(NSString *)sender
++ (instancetype)messageWithAttributedText:(NSAttributedString *)attributedText sender:(NSString *)sender
 {
-    return [[self alloc] initWithText:text sender:sender date:[NSDate date]];
+    return [[self alloc] initWithAttributedText:attributedText sender:sender date:[NSDate date]];
 }
 
 + (instancetype)messageWithImage:(UIImage *)sourceImage thumbnailImage:(UIImage *)thumbnailImage sender:(NSString *)sender
@@ -59,18 +59,18 @@
     return [[self alloc] initWithAudioURL:sourceURL sender:sender date:[NSDate date]];
 }
 
-- (instancetype)initWithText:(NSString *)text
-                      sender:(NSString *)sender
-                        date:(NSDate *)date
+- (instancetype)initWithAttributedText:(NSAttributedString *)attributedText
+                                sender:(NSString *)sender
+                                  date:(NSDate *)date
 {
-    NSParameterAssert(text != nil);
+    NSParameterAssert(attributedText != nil);
     NSParameterAssert(sender != nil);
     NSParameterAssert(date != nil);
     
     self = [self init];
     if (self) {
         _type = JSQMessageText;
-        _text = text;
+        _attributedText = attributedText;
         _sender = sender;
         _date = date;
     }
@@ -217,7 +217,7 @@
         _type = JSQMessageText;
         _sender = @"";
         _date = [NSDate date];
-        _text = @"";
+        _attributedText = [[NSAttributedString alloc] initWithString:@""];
         _audio = nil;
         _sourceImage = nil;
         _thumbnailImage = nil;
@@ -232,7 +232,7 @@
 {
     _sender = nil;
     _date = nil;
-    _text = nil;
+    _attributedText = nil;
     _audio = nil;
     _sourceImage = nil;
     _thumbnailImage = nil;
@@ -251,7 +251,7 @@
     
     BOOL dateEqual = [self.date compare:aMessage.date] == NSOrderedSame;
     
-    BOOL textEqual = [self.text isEqualToString:aMessage.text];
+    BOOL textEqual = [self.attributedText isEqualToAttributedString:aMessage.attributedText];
     
     BOOL audioEqual = (!self.audio && !aMessage.audio) ? YES : [self.audio isEqualToData:aMessage.audio];
     
@@ -297,7 +297,7 @@
 
 - (NSUInteger)hash
 {
-    return [self.text hash] ^ [self.sender hash] ^ [self.date hash];
+    return [self.attributedText.string hash] ^ [self.sender hash] ^ [self.date hash];
 }
 
 - (NSString *)description
@@ -305,7 +305,7 @@
     return [NSString stringWithFormat:@"<%@: %p; type = %u; sender = %@; date = %@; text = '%@'; "
             @"audio data length = %lu; sourceImage = %@; thumbnailImage = %@; "
              @"videoThumbnail = %@; videoThumbnailPlaceholder = %@; sourceURL = %@>",
-            [self class], self, self.type, self.sender, self.date, self.text,
+            [self class], self, self.type, self.sender, self.date, self.attributedText.string,
             (unsigned long)[self.audio length], self.sourceImage, self.thumbnailImage, self.videoThumbnail,
             self.videoThumbnailPlaceholder, self.sourceURL];
 }
@@ -319,7 +319,7 @@
         _type = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(type))] unsignedIntegerValue];
         _sender = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(sender))];
         _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
-        _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
+        _attributedText = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(attributedText))];
         _audio = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(audio))];
         _sourceImage = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(sourceImage))];
         _thumbnailImage = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(thumbnailImage))];
@@ -335,7 +335,7 @@
     [aCoder encodeObject:@(self.type) forKey:NSStringFromSelector(@selector(type))];
     [aCoder encodeObject:self.sender forKey:NSStringFromSelector(@selector(sender))];
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
-    [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeObject:self.attributedText forKey:NSStringFromSelector(@selector(attributedText))];
     [aCoder encodeObject:self.audio forKey:NSStringFromSelector(@selector(audio))];
     [aCoder encodeObject:self.sourceImage forKey:NSStringFromSelector(@selector(sourceImage))];
     [aCoder encodeObject:self.thumbnailImage forKey:NSStringFromSelector(@selector(thumbnailImage))];
@@ -352,7 +352,7 @@
     copy.type = [[@(self.type) copy] unsignedIntegerValue];
     copy.sender = [self.sender copy];
     copy.date = [self.date copy];
-    copy.text = [self.text copy];
+    copy.attributedText = [self.attributedText copy];
     copy.audio = [self.audio copy];
     copy.sourceImage = [self.sourceImage copy];
     copy.thumbnailImage = [self.thumbnailImage copy];

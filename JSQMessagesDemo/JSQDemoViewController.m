@@ -46,12 +46,12 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     NSURL *localAudioURL = [[NSBundle mainBundle] URLForResource:@"demo_for_Elise" withExtension:@"mp3"];
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"Welcome to JSQMessages: A messaging UI framework for iOS."] sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."] sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com."] sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better."] sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"It is unit-tested, free, and open-source."] sender:kJSQDemoAvatarNameCook date:[NSDate date]],
+                     [[JSQMessage alloc] initWithAttributedText:[[NSAttributedString alloc] initWithString:@"Oh, and there's sweet documentation."] sender:self.sender date:[NSDate date]],
                      
                      [JSQMessage messageWithImageURL:[NSURL URLWithString:@"https://s3.amazonaws.com/fast-image-cache/demo-images/FICDDemoImage005.jpg"]
                                     placeholderImage:placeholderImage sender:kJSQDemoAvatarNameWoz],
@@ -132,7 +132,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
      */
     BOOL addREALLYLongMessage = NO;
     if (addREALLYLongMessage) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:self.sender];
+        JSQMessage *reallyLongMessage = [JSQMessage messageWithAttributedText:[[NSAttributedString alloc] initWithString:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END"] sender:self.sender];
         [self.messages addObject:reallyLongMessage];
     }
 }
@@ -265,9 +265,9 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 #pragma mark - JSQMessagesViewController method overrides
 
-- (void)didSendMessageWithText:(NSString *)text
-                        sender:(NSString *)sender
-                          date:(NSDate *)date
+- (void)didSendMessageWithAttributedText:(NSAttributedString *)attributedText
+                                  sender:(NSString *)sender
+                                    date:(NSDate *)date
 {
     /**
      *  Sending a message. Your implementation of this method should do *at least* the following:
@@ -278,7 +278,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
+    JSQMessage *message = [[JSQMessage alloc] initWithAttributedText:attributedText sender:sender date:date];
     [self.messages addObject:message];
     
     [self finishSendingMessage];
@@ -293,13 +293,25 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 
 - (void)didPressRightBarButton:(UIButton *)sender
 {
+    NSLog(@"__%d", [self.inputToolbar.contentView.textView hasText]);
     NSLog(@"");
 }
 
 - (void)didPressRightBarButton2:(UIButton *)sender
 {
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:self.inputToolbar.contentView.textView.attributedText];
+    
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment.image = [UIImage imageNamed:@"0.bmp"];
+    
+    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+    [string appendAttributedString:attachmentString];
+    
+    self.inputToolbar.contentView.textView.attributedText = string;
+    
     NSLog(@"");
 }
+
 
 - (void)didStartRecording:(UIButton *)sender
 {

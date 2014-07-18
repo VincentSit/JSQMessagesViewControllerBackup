@@ -53,6 +53,7 @@
 #import "JSQMessagesThumbnailFactory.h"
 
 #import "JSQSystemSoundPlayer+JSQMessages.h"
+#import "NSAttributedString+JSQMessages.h"
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIImage+JSQMessages.h"

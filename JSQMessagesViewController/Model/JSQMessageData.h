@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, JSQMessageType) {
 /**
  *  @return The body text of the message. Only valid when `type` is `JSQMessageText`.
  */
-- (NSString *)text;
+- (NSAttributedString *)attributedText;
 
 
 /**
