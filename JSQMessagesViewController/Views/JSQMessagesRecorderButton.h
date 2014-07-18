@@ -1,9 +1,19 @@
 //
-//  JSQMessagesRecorderButton.h
-//  JSQMessages
+//  Created by Vincent Sit
+//  http://xuexuefeng.com
 //
-//  Created by Vincent Sit on 14-7-16.
-//  Copyright (c) 2014年 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQMessagesViewController
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQMessagesViewController
+//
+//
+//  License
+//  Copyright (c) 2014 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import <UIKit/UIKit.h>
