@@ -227,7 +227,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     
     
     /**
-     *  Show the tpying indicator
+     *  Set the typing indicator to be shown
      */
     self.showTypingIndicator = !self.showTypingIndicator;
     
