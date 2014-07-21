@@ -307,7 +307,6 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     
     NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
     [string appendAttributedString:attachmentString];
-    [string appendAttributedString:[[NSAttributedString alloc] initWithString:@"1"]];
     [string addAttribute:NSFontAttributeName value:self.inputToolbar.contentView.textView.font range:NSMakeRange(0, string.length)];
     self.inputToolbar.contentView.textView.attributedText = string;
     

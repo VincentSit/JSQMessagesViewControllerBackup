@@ -25,7 +25,7 @@
                              glyphPosition:(CGPoint)position
                             characterIndex:(NSUInteger)charIndex
 {
-    return CGRectMake(0 , -2, lineFrag.size.height, lineFrag.size.height);
+    return CGRectMake(0 , -3.5f, lineFrag.size.height, lineFrag.size.height);
 }
 
 @end
