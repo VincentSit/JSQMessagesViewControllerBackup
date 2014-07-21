@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44E73A51192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */; };
+		451C613E197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 451C613D197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.m */; };
 		452E01461963E6A200842B06 /* JSQMessagesCollectionViewPhotoCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452E01451963E6A200842B06 /* JSQMessagesCollectionViewPhotoCellOutgoing.xib */; };
 		452F078019665EFD00807F29 /* demo_for_Elise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 452F077F19665EFD00807F29 /* demo_for_Elise.mp3 */; };
 		452F07821966629900807F29 /* demo_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 452F07811966629900807F29 /* demo_video.mp4 */; };
@@ -164,6 +165,8 @@
 		343577012CC24261BE4B61A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E73A4F192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
 		44E73A50192D0B5B00D1C86F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		451C613C197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTextAttachment.h; sourceTree = "<group>"; };
+		451C613D197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTextAttachment.m; sourceTree = "<group>"; };
 		452E01451963E6A200842B06 /* JSQMessagesCollectionViewPhotoCellOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewPhotoCellOutgoing.xib; sourceTree = "<group>"; };
 		452F077F19665EFD00807F29 /* demo_for_Elise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = demo_for_Elise.mp3; sourceTree = "<group>"; };
 		452F07811966629900807F29 /* demo_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo_video.mp4; sourceTree = "<group>"; };
@@ -543,6 +546,8 @@
 				8816A67A18E9250400111919 /* JSQMessage.m */,
 				8816A67B18E9250400111919 /* JSQMessageData.h */,
 				935B089D1968F7F300779D58 /* JSQMessagesActivityIndicator.h */,
+				451C613C197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.h */,
+				451C613D197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1002,6 +1007,7 @@
 				8816A6A918E9250400111919 /* JSQMessagesTimestampFormatter.m in Sources */,
 				45E6B38A19628E9D0066458B /* JSQMessagesCollectionViewPhotoCellIncoming.m in Sources */,
 				8816A6B018E9250400111919 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
+				451C613E197CE0CA00F7E0E3 /* JSQMessagesTextAttachment.m in Sources */,
 				885D597318CBD2DC00D77BB3 /* main.m in Sources */,
 				45E6B3A71962B1580066458B /* JSQMessagesCollectionViewAudioCellOutgoing.m in Sources */,
 				457A72EC19652A3500912C0E /* JSQMessagesThumbnailFactory.m in Sources */,

@@ -120,7 +120,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     /**
      *  Change to add more messages for testing
      */
-    NSUInteger messagesToAdd = 1;
+    NSUInteger messagesToAdd = 0;
     NSArray *copyOfMessages = [self.messages copy];
     for (NSUInteger i = 0; i < messagesToAdd; i++) {
         [self.messages addObjectsFromArray:copyOfMessages];
@@ -159,6 +159,7 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
     self.sender = @"Jesse Squires";
     
     [self setupTestModel];
+//    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont systemFontOfSize:20];
     
 //    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [button setBackgroundColor:[UIColor redColor]];
@@ -301,12 +302,13 @@ static NSString * const kJSQDemoAudioMessageURLString = @"https://ia700304.us.ar
 {
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:self.inputToolbar.contentView.textView.attributedText];
     
-    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    JSQMessagesTextAttachment *attachment = [[JSQMessagesTextAttachment alloc] initWithData:nil ofType:nil];
     attachment.image = [UIImage imageNamed:@"0.bmp"];
     
     NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
     [string appendAttributedString:attachmentString];
-    
+    [string appendAttributedString:[[NSAttributedString alloc] initWithString:@"1"]];
+    [string addAttribute:NSFontAttributeName value:self.inputToolbar.contentView.textView.font range:NSMakeRange(0, string.length)];
     self.inputToolbar.contentView.textView.attributedText = string;
     
     NSLog(@"");

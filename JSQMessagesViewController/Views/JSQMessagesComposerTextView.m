@@ -169,7 +169,7 @@
 {
     [super drawRect:rect];
     
-    if ([self.text length] == 0 && self.placeHolder) {
+    if ([self.attributedText length] == 0 && self.placeHolder) {
         [self.placeHolderTextColor set];
         
         [self.placeHolder drawInRect:CGRectInset(rect, 7.0f, 5.0f)
