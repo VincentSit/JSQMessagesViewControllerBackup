@@ -35,6 +35,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 @interface JSQMessagesInputToolbar ()
 
+@property (assign, nonatomic) BOOL jsq_isObserving;
+
 - (void)jsq_leftBarButtonPressed:(UIButton *)sender;
 - (void)jsq_rightBarButtonPressed:(UIButton *)sender;
 - (void)jsq_rightBarButton2Pressed:(UIButton *)sender;
@@ -60,6 +62,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     [super awakeFromNib];
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
+    self.jsq_isObserving = NO;
     
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class]) owner:nil options:nil];
     JSQMessagesToolbarContentView *toolbarContentView = [nibViews firstObject];
@@ -233,7 +236,9 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
+    if (self.jsq_isObserving) {
+        return;
+    }
     
     [self.contentView addObserver:self
                        forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
@@ -254,10 +259,16 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                        forKeyPath:[NSStringFromSelector(@selector(button)) stringByAppendingString:@".alpha"]
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
+    
+    self.jsq_isObserving = YES;
 }
 
 - (void)jsq_removeObservers
 {
+    if (!_jsq_isObserving) {
+        return;
+    }
+    
     @try {
         [_contentView removeObserver:self
                           forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
@@ -276,6 +287,8 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                              context:kJSQMessagesInputToolbarKeyValueObservingContext];
     }
     @catch (NSException *__unused exception) { }
+    
+    _jsq_isObserving = NO;
 }
 
 @end
