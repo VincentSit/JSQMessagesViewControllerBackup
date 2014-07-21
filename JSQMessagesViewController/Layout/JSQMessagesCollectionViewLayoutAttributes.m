@@ -169,30 +169,32 @@
         return NO;
     }
     
-    JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
-    
-    if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
-        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
-        || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
-        || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingThumbnailImageSize, self.incomingThumbnailImageSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingThumbnailImageSize, self.outgoingThumbnailImageSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingVideoThumbnailSize, self.incomingVideoThumbnailSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingVideoThumbnailSize, self.outgoingVideoThumbnailSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingVideoOverlayViewSize, self.incomingVideoOverlayViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingVideoOverlayViewSize, self.outgoingVideoOverlayViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingPhotoActivityIndicatorViewSize, self.incomingPhotoActivityIndicatorViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingPhotoActivityIndicatorViewSize, self.outgoingPhotoActivityIndicatorViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingVideoActivityIndicatorViewSize, self.incomingVideoActivityIndicatorViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingVideoActivityIndicatorViewSize, self.outgoingVideoActivityIndicatorViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.incomingAudioActivityIndicatorViewSize, self.incomingAudioActivityIndicatorViewSize)
-        || !CGSizeEqualToSize(layoutAttributes.outgoingAudioActivityIndicatorViewSize, self.outgoingAudioActivityIndicatorViewSize)
-        || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
-        || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
-        || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
-        || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
-        return NO;
+    if (self.representedElementCategory == UICollectionElementCategoryCell) {
+        JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
+        
+        if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
+            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
+            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
+            || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingThumbnailImageSize, self.incomingThumbnailImageSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingThumbnailImageSize, self.outgoingThumbnailImageSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingVideoThumbnailSize, self.incomingVideoThumbnailSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingVideoThumbnailSize, self.outgoingVideoThumbnailSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingVideoOverlayViewSize, self.incomingVideoOverlayViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingVideoOverlayViewSize, self.outgoingVideoOverlayViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingPhotoActivityIndicatorViewSize, self.incomingPhotoActivityIndicatorViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingPhotoActivityIndicatorViewSize, self.outgoingPhotoActivityIndicatorViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingVideoActivityIndicatorViewSize, self.incomingVideoActivityIndicatorViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingVideoActivityIndicatorViewSize, self.outgoingVideoActivityIndicatorViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.incomingAudioActivityIndicatorViewSize, self.incomingAudioActivityIndicatorViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.outgoingAudioActivityIndicatorViewSize, self.outgoingAudioActivityIndicatorViewSize)
+            || (int)layoutAttributes.messageBubbleLeftRightMargin != (int)self.messageBubbleLeftRightMargin
+            || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
+            || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
+            || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
+            return NO;
+        }
     }
     
     return [super isEqual:object];
@@ -211,6 +213,11 @@
 - (instancetype)copyWithZone:(NSZone *)zone
 {
     JSQMessagesCollectionViewLayoutAttributes *copy = [super copyWithZone:zone];
+    
+    if (copy.representedElementCategory != UICollectionElementCategoryCell) {
+        return copy;
+    }
+    
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleLeftRightMargin = self.messageBubbleLeftRightMargin;
     copy.textViewFrameInsets = self.textViewFrameInsets;
